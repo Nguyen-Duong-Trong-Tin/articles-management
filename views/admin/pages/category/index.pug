@@ -1,0 +1,76 @@
+extends ../../layouts/admin.pug
+
+include ../../mixins/boxTitle.pug
+
+block main
+  +boxTitle(pageTitle)
+
+  .d-flex.justify-content-end.mb-3
+    a(
+      href=`/${admin}/categories/create`
+      class="btn btn-success"
+    ) Tạo
+
+  table.table.table-category
+    thead
+      tr
+        th(scope="col") #
+        th(scope="col") Ảnh
+        th(scope="col") Tiêu đề
+        th(scope="col") Trạng thái
+        th(scope="col") Vị trí
+        th(scope="col") Hành động
+    tbody
+      each category, index in categories
+        tr
+          th(scope="row") #{index + 1}
+          td.inner-image
+            img(src=category.image)
+          td #{category.title}
+          td
+            form(
+              method="POST"
+              action=`/${admin}/categories/updateStatus`
+              form-update-category-status
+              data-id=category.id
+            )
+              select(
+                select-update-category-status
+              )
+                option(
+                  value="active"
+                  selected=(category.status === "active")
+                ) Hoạt động
+                option(
+                  value="inactive"
+                  selected=(category.status === "inactive")
+                ) Ngưng hoạt động
+          td
+            form(
+              method="POST"
+              action=`/${admin}/categories/updatePosition`
+              form-update-category-position
+              data-id=category.id
+            )
+              input(
+                type="number"
+                name="position"
+                class="form-control"
+                min=1
+                value=category.position
+              )
+          td
+            a(
+              href=`/${admin}/categories/detail/${category.id}`
+              class="btn btn-primary"
+            ) Xem
+            a(
+              href=`/${admin}/categories/update/${category.id}`
+              class="btn btn-warning mx-1"
+            ) Sửa
+            form(
+              method="POST"
+              action=`/${admin}/categories/delete/${category.id}?_method=DELETE`
+              form-delete-category
+            )
+              button.btn.btn-danger Xóa

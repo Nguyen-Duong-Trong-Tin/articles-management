@@ -1,0 +1,55 @@
+extends ../../layouts/admin.pug
+
+include ../../mixins/goBack.pug
+include ../../mixins/boxTitle.pug
+
+block main
+  +goBack()
+
+  +boxTitle(pageTitle)
+
+  form(
+    method="POST"
+    action=`/${admin}/categories/update/${category.id}?_method=PATCH`
+  )
+    .mb-3
+      label.form-label Tiêu đề
+      input(
+        name="title"
+        class="form-control"
+        value=category.title
+        required
+      )
+    .mb-3
+      label.form-label Ảnh
+      input(
+        name="image"
+        value=category.image
+        class="form-control"
+      )
+    .mb-3
+      label.form-label Mô tả
+      textarea(
+        name="description"
+        class="form-control"
+        rows=10
+      ) #{category.description}
+    .mb-3
+      label.form-label Trạng thái
+      select(
+        name="status"
+        class="form-select"
+      )
+        option(value="active" selected=(category.status === "active")) Hoạt động
+        option(value="inactive" selected=(category.status === "inactive")) Ngưng hoạt động
+    .mb-3
+      label.form-label Vị trí
+      input(
+        name="position"
+        type="number"
+        min=1
+        value=category.position
+        class="form-control"
+      )
+    .my-3.d-flex.justify-content-center
+      button.btn.btn-primary Cập nhật

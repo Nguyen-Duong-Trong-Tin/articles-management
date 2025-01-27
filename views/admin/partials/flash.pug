@@ -1,0 +1,13 @@
+- if (messages.success)
+  div(
+    class="flash flash-success"
+    flash
+  )
+    span #{messages.success}
+    
+- if (messages.error)
+  div(
+    class="flash flash-error"
+    flash
+  )
+    span #{messages.error}

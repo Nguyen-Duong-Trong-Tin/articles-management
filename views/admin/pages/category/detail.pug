@@ -1,0 +1,48 @@
+extends ../../layouts/admin.pug
+
+include ../../mixins/goBack.pug
+include ../../mixins/boxTitle.pug
+
+block main
+  +goBack()
+
+  +boxTitle(pageTitle)
+
+  .mb-3
+    label.form-label Tiêu đề
+    input(
+      class="form-control"
+      value=category.title
+      readOnly
+    )
+  .mb-3
+    label.form-label Ảnh
+    input(
+      class="form-control"
+      value=category.image
+      readOnly
+    )
+  .mb-3
+    label.form-label Mô tả
+    textarea(
+      class="form-control"
+      rows=10
+      readOnly
+    ) #{category.description}
+  .mb-3
+    label.form-label Trạng thái
+    select(
+      class="form-select"
+      disabled
+    )
+      option(value="active" selected=(category.status === "active")) Hoạt động
+      option(value="inactive" selected=(category.status === "inactive")) Ngưng hoạt động
+  .mb-3
+    label.form-label Vị trí
+    input(
+      class="form-control"
+      type="number"
+      min=1
+      value=category.position
+      readOnly
+    )

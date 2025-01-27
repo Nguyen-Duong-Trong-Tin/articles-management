@@ -1,0 +1,14 @@
+/* Table Category */
+.table-category .inner-image {
+  width: 20%;
+}
+
+.table-category .inner-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.table-category [form-delete-category] {
+  display: inline;
+}
+/* End Table Category */

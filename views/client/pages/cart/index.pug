@@ -1,0 +1,82 @@
+extends ../../layouts/default.pug
+
+include ../../mixins/boxTitle.pug
+include ../../mixins/formatCurrency.pug
+
+block main
+  +boxTitle(pageTitle)
+
+  table.table.cart-table
+    thead
+      tr
+        th(scope="col") #
+        th(scope="col") Ảnh
+        th(scope="col") Tiêu đề
+        th(scope="col") Giá
+        th(scope="col") Số lượng
+        th(scope="col") Tổng tiền
+        th(scope="col") Hành động
+    tbody
+      each item, index in cart
+        if (item.tour)
+          tr
+            th(scope="row") #{index + 1}
+            td.inner-image
+              img(src=item.tour.images[0])
+            td #{item.tour.title}
+            td
+              +formatCurrency(item.tour.newPrice)
+            td
+              form(
+                method="POST"
+                action="/carts/updateQuantity?_method=PATCH"
+                form-update-cart-quantity
+              )
+                input(
+                  type="text"
+                  name="tourId" 
+                  value=item.tour.id
+                  class="d-none"
+                )
+                input(
+                  type="number"
+                  name="quantity"
+                  class="form-control"
+                  min="1"
+                  max=item.tour.stock
+                  value=item.quantity
+                )
+            td
+              +formatCurrency(item.tour.newPrice * item.quantity)
+            td
+              form(
+                method="POST"
+                action=`/carts/deleteItem/${item.tour.id}?_method=DELETE`
+              )
+                button(class="btn btn-danger") Xóa
+
+  +boxTitle("Đặt Hàng")
+  form(
+    method="POST"
+    action=""
+  )
+    .mb-3
+      label.form-label Họ tên
+      input(
+        name="fullName"
+        class="form-control"
+      )
+    .mb-3
+      label.form-label Số điện thoại
+      input(
+        name="phone"
+        class="form-control"
+      )
+    .mb-3
+      label.form-label Ghi chú
+      input(
+        name="note"
+        class="form-control"
+      )
+    .mb-3.d-flex.justify-content-center
+      button(class="btn btn-primary") Đặt hàng

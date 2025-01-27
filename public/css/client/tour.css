@@ -1,0 +1,89 @@
+/* Tours */
+.card-tour {
+  margin-top: 30px;
+}
+
+.card-tour img {
+  height: 200px;
+}
+
+.card-tour .new-price {
+  color: green;
+}
+
+.card-tour .old-price {
+  text-decoration: line-through;
+}
+/* End Tours */
+
+/* Tour Detail */
+.tour-detail-images .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.tour-detail-images .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tour-detail-images .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-detail-images .swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tour-detail-images .swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.tour-detail-images .mySwiper2 {
+  height: 80%;
+  width: 100%;
+}
+
+.tour-detail-images .mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.tour-detail-images .mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.tour-detail-images .mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.tour-detail-images .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-detail-info .title {
+  font-size: 36px;
+  text-align: center;
+}
+
+.tour-detail-info .old-price {
+  text-decoration: line-through;
+}
+/* End Tour Detail */
