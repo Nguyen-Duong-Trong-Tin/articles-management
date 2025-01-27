@@ -1,0 +1,34 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
+const app = (0, express_1.default)();
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const moment = require('moment');
+global.moment = moment;
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const flash = require("express-flash");
+app.use(cookieParser("keyboard cat"));
+app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(flash());
+app.set("views", path_1.default.join(__dirname, "views"));
+app.set("view engine", "pug");
+app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+// Routes
+const index_route_1 = __importDefault(require("./routes/client/index.route"));
+(0, index_route_1.default)(app);
+const index_route_2 = __importDefault(require("./routes/admin/index.route"));
+(0, index_route_2.default)(app);
+const port = process.env.PORT;
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+});
