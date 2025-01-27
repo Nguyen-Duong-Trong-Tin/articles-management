@@ -1,0 +1,10 @@
+/* Cart Table */
+.cart-table .inner-image {
+  width: 20%;
+}
+
+.cart-table .inner-image img {
+  width: 100%;
+  object-fit: contain;
+}
+/* End Cart Table */

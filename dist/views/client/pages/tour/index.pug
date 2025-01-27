@@ -1,0 +1,32 @@
+extends ../../layouts/default.pug
+
+include ../../mixins/goBack.pug
+include ../../mixins/boxTitle.pug
+include ../../mixins/formatCurrency.pug
+
+block main
+  +goBack()
+
+  +boxTitle(pageTitle)
+
+  .row
+    each tour in tours
+      .col-3
+        .card.card-tour
+          if (tour.images.length)
+            img(src=tour.images[0])
+
+          .card-body
+            h5.card-title #{tour.title}
+
+            h6.card-title.new-price 
+              +formatCurrency(tour.newPrice)
+            h6.card-title.old-price
+              +formatCurrency(tour.price)
+
+            h6.card-title.discount Giảm #{tour.discount} %
+
+            a(
+              href=`/tours/detail/${tour.slug}`
+              class="btn btn-primary"
+            ) Chi tiết

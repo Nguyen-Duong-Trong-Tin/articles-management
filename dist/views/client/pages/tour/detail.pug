@@ -1,0 +1,74 @@
+extends ../../layouts/default.pug
+
+include ../../mixins/goBack.pug
+include ../../mixins/boxTitle.pug
+include ../../mixins/formatTime.pug
+include ../../mixins/formatCurrency.pug
+
+block main
+  +goBack()
+
+  +boxTitle(pageTitle)
+  
+  .tour-detail
+    .row
+      .col-6
+        .tour-detail-images
+          .swiper.mySwiper2
+            .swiper-wrapper
+              each image in tour.images
+                .swiper-slide
+                  img(src=image)
+            .swiper-button-next
+            .swiper-button-prev
+          div(
+            thumbsSlider="" 
+            class="swiper mySwiper"
+          )
+            .swiper-wrapper
+              each image in tour.images
+                .swiper-slide
+                  img(src=image)
+        
+      .col-6
+        .tour-detail-info
+          h5.title #{tour.title}
+          p Mã: #{tour.code}
+          p Khởi hành:
+            +formatTime(tour.timeStart)
+          p Còn lại: #{tour.stock}
+          pe Giá mới:
+            +formatCurrency(tour.newPrice)
+          p.old-price Giá cũ: 
+            +formatCurrency(tour.price)
+          p Giảm giá: #{tour.discount}%
+
+          form(
+            method="POST"
+            action="/carts/update?_method=PATCH"
+          )
+            .mb-3
+              label.form-label Số lượng
+              input(
+                type="text"
+                name="tourId" 
+                value=tour.id
+                class="d-none"
+              )
+              input(
+                type="number"
+                name="quantity"
+                class="form-control"
+                min="1"
+                max=tour.stock
+                value=1
+              )
+            button(class="btn btn-primary") Thêm
+
+    .tour-description
+      h2 Thông tin
+      p #{tour.information}
+      
+    .tour-schedule  
+      h2 Lịch trình
+      p #{tour.schedule}
